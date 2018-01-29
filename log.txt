@@ -1,0 +1,81 @@
+-----Tweets Log Entry Start-----
+Sun Jan 28 2018 13:53:31 GMT-0500 (Eastern Standard Time)
+terminal commands: 
+C:\Program Files\nodejs\node.exe,C:\Users\aidan\Desktop\class\homework8\liri\liri.js,do-what-it-says
+Data Output: 
+
+-----Tweets-----
+Tweet: Good morning!
+-----Tweets-----
+Tweet: Showers are nice
+-----Tweets-----
+Created at: Sun Jan 28 16:02:54 +0000 2018
+-----Tweets-----
+Tweet: Man, this is only my third tweet. I need 17 more!
+-----Tweets-----
+Created at: Sun Jan 28 00:40:30 +0000 2018
+-----Tweets-----
+Created at: Sun Jan 28 04:55:54 +0000 2018
+-----Tweets-----
+Tweet: Just setting up my Twitter. #myfirstTweet
+-----Tweets-----
+Tweet: The Grinch is a classic!
+-----Tweets-----
+Created at: Sun Jan 28 00:33:59 +0000 2018
+-----Tweets Log Entry End-----
+
+-----Tweets-----
+Created at: Sat Jan 27 18:48:21 +0000 2018-----Tweets Log Entry Start-----
+Sun Jan 28 2018 13:54:18 GMT-0500 (Eastern Standard Time)
+terminal commands: 
+C:\Program Files\nodejs\node.exe,C:\Users\aidan\Desktop\class\homework8\liri\liri.js,do-what-it-says
+Data Output: 
+
+-----Tweets-----
+Tweet: Good morning!
+-----Tweets-----
+Created at: Sun Jan 28 16:02:54 +0000 2018
+-----Tweets-----
+Tweet: Showers are nice
+-----Tweets-----
+Created at: Sun Jan 28 04:55:54 +0000 2018
+-----Tweets-----
+Tweet: Man, this is only my third tweet. I need 17 more!
+-----Tweets-----
+Created at: Sun Jan 28 00:40:30 +0000 2018
+-----Tweets-----
+Tweet: The Grinch is a classic!
+-----Tweets-----
+Created at: Sun Jan 28 00:33:59 +0000 2018
+-----Tweets-----
+Tweet: Just setting up my Twitter. #myfirstTweet
+-----Tweets Log Entry End-----
+
+-----Tweets-----
+Created at: Sat Jan 27 18:48:21 +0000 2018-----Tweets Log Entry Start-----
+Sun Jan 28 2018 13:56:13 GMT-0500 (Eastern Standard Time)
+terminal commands: 
+C:\Program Files\nodejs\node.exe,C:\Users\aidan\Desktop\class\homework8\liri\liri.js,do-what-it-says
+Data Output: 
+
+-----Tweets-----
+Tweet: Good morning!
+-----Tweets-----
+Created at: Sun Jan 28 16:02:54 +0000 2018
+-----Tweets-----
+Tweet: Showers are nice
+-----Tweets-----
+Created at: Sun Jan 28 04:55:54 +0000 2018
+-----Tweets-----
+Tweet: Man, this is only my third tweet. I need 17 more!
+-----Tweets-----
+Created at: Sun Jan 28 00:40:30 +0000 2018
+-----Tweets-----
+Tweet: The Grinch is a classic!
+-----Tweets-----
+Created at: Sun Jan 28 00:33:59 +0000 2018
+-----Tweets-----
+Tweet: Just setting up my Twitter. #myfirstTweet
+-----Tweets-----
+Created at: Sat Jan 27 18:48:21 +0000 2018
+-----Tweets Log Entry End-----

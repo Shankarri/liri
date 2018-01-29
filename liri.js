@@ -5,9 +5,6 @@ var keys = require("./keys.js");
 var Twitter = require("twitter");
 var Spotify = require('node-spotify-api');
 
-// AccessesSpotify keys
-var spotify = new Spotify(keys.spotify);
-
 // Grabs the command from the terminal
 var command = process.argv[2];
 var searchValue = "";
@@ -34,10 +31,12 @@ switch (command) {
         break;
 };
 
+// Need a write function to fs.appendFile 
+
 // ++++++++++++++++ Twitter my-tweets ++++++++++++++++++++++
 function getTweets() {
-    
-    var client = new Twitter(keys.twitter); // Accesses Twitter Keys
+    // Accesses Twitter Keys
+    var client = new Twitter(keys.twitter); 
     var params = {screen_name: 'aidan_clemente', count: 20};
 
     client.get('statuses/user_timeline', params, function(responseError, tweets, response) {
@@ -88,30 +87,48 @@ function getTweets() {
 };
 
 // ++++++++++++++++++ Spotify spotify-this-song ++++++++++++++++++++++++++++
-// function searchSong(searchValue) {
+function searchSong(searchValue) {
 
-//     console.log("searchSong is running!")
-    // spotify
-    // .search({ type: 'track', query: searchValue })
-    // .then(function(response) {
-    //   console.log(response);
-    // })
-    // .catch(function(err) {
-    //   console.log(err);
-    // });
+    if (searchValue == "") {
+        searchValue = "The Sign";
+    }
+    // AccessesSpotify keys
+    // var spotify = new Spotify(keys.spotify);
 
-//     spotify
-//     request("https://api.spotify.com/v1/search?q=" + searchValue + "&/tracks/7yCPwWs66K8Ba5lFuU2bcx", function(spotifyError, response, body) {
-//     .then(function(response) {
-//         console.log(response); 
-//         })
-//         .catch(function(spotifyErrorerr) {
-//         console.error('Error occurred: ' + spotifyError); 
-//         });
+    // console.log("searchSong is running!")
 
-//     }
+    // spotify.request("https://api.spotify.com/v1/search?q=" + searchValue + "&/tracks/7yCPwWs66K8Ba5lFuU2bcx", function(spotifyError, response, body) {
+    //     if (!spotifyError && response.statusCode === 200) {
+    //         console.log(response); 
+    //     } else {
+    //         console.error('Error occurred: ' + spotifyError); 
+    //     }
+    // });  
     
-// };
+    var spotify = new Spotify(keys.spotify);
+    
+   
+    spotify.search({ type: 'track', query: searchValue }, function(respError, response) {
+         if (respError) {
+            return console.log("Error occured: ", respError);
+         }
+
+         var songResp = response.tracks.items;
+         console.log(JSON.stringify("Artist: " + songResp[0].artists[0].name));
+         console.log(JSON.stringify("Song title: " + response.tracks.items[0].name));
+         console.log(JSON.stringify("Album name: " + songResp[0].album.name));
+
+         console.log(JSON.stringify("URL Preview: " + songResp[0].preview_url));
+         console.log(JSON.stringify(songResp[1], null, 2));
+     })
+    //  .then(function(response) {
+    //      var songResp = response.tracks.items;
+    //     console.log(JSON.stringify(response, null, 2));
+    //  })
+    //  .catch(function(err) {
+    //    console.log(err);
+    //  });
+};
 
 // ++++++++++++++++ OMDB movie-this +++++++++++++++++++++++
 function searchMovie(searchValue) {
@@ -127,22 +144,21 @@ function searchMovie(searchValue) {
         if (!err && response.statusCode === 200) {
             movieBody = JSON.parse(body);
             
-            console.log(movieBody);
             console.log("\n-------------------------------");
-            console.log("The movie title is: " + movieBody.Title);
-            console.log("The movie year is: " + movieBody.Year);
-            console.log("The movie IMDB rating is: " + movieBody.imdbRating);
+            console.log("Movie Title: " + movieBody.Title);
+            console.log("Year: " + movieBody.Year);
+            console.log("IMDB rating: " + movieBody.imdbRating);
 
-            if (movieBody.Ratings.length < 2){
+            if (movieBody.Ratings.length < 2) {
                 console.log("There is no Rotten Tomatoes Rating for this movie.")
             } else {
-                console.log("The movie Rotten Tomatoes Rating is: " + movieBody.Ratings[[1]].Value);
+                console.log("Rotten Tomatoes Rating: " + movieBody.Ratings[[1]].Value);
             }
             
-            console.log("The country where the movie was produced is: " + movieBody.Country);
-            console.log("The language of the movie is: " + movieBody.Language);
-            console.log("The plot of the movie is: " + movieBody.Plot);
-            console.log("The actors in the movie are: " + movieBody.Actors);
+            console.log("Country: " + movieBody.Country);
+            console.log("Language: " + movieBody.Language);
+            console.log("Plot: " + movieBody.Plot);
+            console.log("Actors: " + movieBody.Actors);
             console.log("\n-------------------------------");
         }
     });
@@ -157,7 +173,6 @@ function randomText() {
         }
 
         var randomArray = data.split(", ");
-        console.log(randomArray);
 
         if (randomArray[0] == "spotify-this-song") {
             searchSong(randomArray[1]);
