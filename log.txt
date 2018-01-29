@@ -1,81 +1,76 @@
 -----Tweets Log Entry Start-----
-Sun Jan 28 2018 13:53:31 GMT-0500 (Eastern Standard Time)
+
+Processed at: 
+Mon Jan 29 2018 11:07:06 GMT-0500 (Eastern Standard Time)
+
 terminal commands: 
-C:\Program Files\nodejs\node.exe,C:\Users\aidan\Desktop\class\homework8\liri\liri.js,do-what-it-says
+C:\Program Files\nodejs\node.exe,C:\Users\aidan\Desktop\class\homework8\liri\liri.js,my-tweets
+
 Data Output: 
+Looks like somebody's got a case of the Mondays.
+Tweeted on: Mon Jan 29 14:22:05 +0000 2018
 
------Tweets-----
-Tweet: Good morning!
------Tweets-----
-Tweet: Showers are nice
------Tweets-----
-Created at: Sun Jan 28 16:02:54 +0000 2018
------Tweets-----
-Tweet: Man, this is only my third tweet. I need 17 more!
------Tweets-----
-Created at: Sun Jan 28 00:40:30 +0000 2018
------Tweets-----
-Created at: Sun Jan 28 04:55:54 +0000 2018
------Tweets-----
-Tweet: Just setting up my Twitter. #myfirstTweet
------Tweets-----
-Tweet: The Grinch is a classic!
------Tweets-----
-Created at: Sun Jan 28 00:33:59 +0000 2018
+The frost killed a lot of plants around here...🙁
+Tweeted on: Mon Jan 29 15:26:08 +0000 2018
+
+Not that I would know, I've been inside coding all morning!
+Tweeted on: Sun Jan 28 19:11:04 +0000 2018
+
+It looks crummy outside, but it's warm.
+Tweeted on: Sun Jan 28 19:09:46 +0000 2018
+
+Spotify API is getting the best of me... : (
+Tweeted on: Sun Jan 28 19:12:03 +0000 2018
+
+Much needed rain, keep it coming!
+Tweeted on: Mon Jan 29 03:46:37 +0000 2018
+
+Man, this is only my third tweet. I need 17 more!
+Tweeted on: Sun Jan 28 00:40:30 +0000 2018
+
+Showers are nice
+Tweeted on: Sun Jan 28 04:55:54 +0000 2018
+
+Good morning!
+Tweeted on: Sun Jan 28 16:02:54 +0000 2018
+
+Just setting up my Twitter. #myfirstTweet
+Tweeted on: Sat Jan 27 18:48:21 +0000 2018
+
+The Grinch is a classic!
+Tweeted on: Sun Jan 28 00:33:59 +0000 2018
+
 -----Tweets Log Entry End-----
+-----Spotify Log Entry Start-----
+Processed on:
+Mon Jan 29 2018 11:07:21 GMT-0500 (Eastern Standard Time)
 
------Tweets-----
-Created at: Sat Jan 27 18:48:21 +0000 2018-----Tweets Log Entry Start-----
-Sun Jan 28 2018 13:54:18 GMT-0500 (Eastern Standard Time)
-terminal commands: 
-C:\Program Files\nodejs\node.exe,C:\Users\aidan\Desktop\class\homework8\liri\liri.js,do-what-it-says
+terminal commands:
+C:\Program Files\nodejs\node.exe,C:\Users\aidan\Desktop\class\homework8\liri\liri.js,spotify-this-song
+
 Data Output: 
+Artist: Ace of Base
+Song title: The Sign
+Album name: The Sign (US Album) [Remastered]
+URL Preview: https://p.scdn.co/mp3-preview/4c463359f67dd3546db7294d236dd0ae991882ff?cid=15e861855613444eb6cffde6bfcb1fb1
 
------Tweets-----
-Tweet: Good morning!
------Tweets-----
-Created at: Sun Jan 28 16:02:54 +0000 2018
------Tweets-----
-Tweet: Showers are nice
------Tweets-----
-Created at: Sun Jan 28 04:55:54 +0000 2018
------Tweets-----
-Tweet: Man, this is only my third tweet. I need 17 more!
------Tweets-----
-Created at: Sun Jan 28 00:40:30 +0000 2018
------Tweets-----
-Tweet: The Grinch is a classic!
------Tweets-----
-Created at: Sun Jan 28 00:33:59 +0000 2018
------Tweets-----
-Tweet: Just setting up my Twitter. #myfirstTweet
------Tweets Log Entry End-----
+-----Spotify Log Entry End-----
+-----OMDB Log Entry Start-----
+Processed on:
+Mon Jan 29 2018 11:13:35 GMT-0500 (Eastern Standard Time)
 
------Tweets-----
-Created at: Sat Jan 27 18:48:21 +0000 2018-----Tweets Log Entry Start-----
-Sun Jan 28 2018 13:56:13 GMT-0500 (Eastern Standard Time)
-terminal commands: 
-C:\Program Files\nodejs\node.exe,C:\Users\aidan\Desktop\class\homework8\liri\liri.js,do-what-it-says
+terminal commands:
+C:\Program Files\nodejs\node.exe,C:\Users\aidan\Desktop\class\homework8\liri\liri.js,movie-this
+
 Data Output: 
+Movie Title: Mr. Nobody
+Year: 2009
+IMDB rating: 7.9
+Rotten Tomatoes Rating: 66%
+Country: Belgium, Germany, Canada, France, USA, UK
+Language: English, Mohawk
+Plot: A boy stands on a station platform as a train is about to leave. Should he go with his mother or stay with his father? Infinite possibilities arise from this decision. As long as he doesn't choose, anything is possible.
+Actors: Jared Leto, Sarah Polley, Diane Kruger, Linh Dan Pham
 
------Tweets-----
-Tweet: Good morning!
------Tweets-----
-Created at: Sun Jan 28 16:02:54 +0000 2018
------Tweets-----
-Tweet: Showers are nice
------Tweets-----
-Created at: Sun Jan 28 04:55:54 +0000 2018
------Tweets-----
-Tweet: Man, this is only my third tweet. I need 17 more!
------Tweets-----
-Created at: Sun Jan 28 00:40:30 +0000 2018
------Tweets-----
-Tweet: The Grinch is a classic!
------Tweets-----
-Created at: Sun Jan 28 00:33:59 +0000 2018
------Tweets-----
-Tweet: Just setting up my Twitter. #myfirstTweet
------Tweets-----
-Created at: Sat Jan 27 18:48:21 +0000 2018
------Tweets Log Entry End-----
+-----OMDB Log Entry End-----
+

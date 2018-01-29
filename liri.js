@@ -13,59 +13,63 @@ var searchValue = "";
 for (var i = 3; i < process.argv.length; i++) {
     searchValue += process.argv[i] + " ";
 };
+ console.log("Search Value: ", searchValue); 
 
-// Need a write function to fs.appendFile 
+// Error Functions 
+function errorFunction(respError) {
+    if (respError) {
+        return console.log("Error occured: ", respError);
+     }
+};
+
+// For logging to log.txt
+function errorFunctionStart (respError) {
+    if (respError) {
+        console.log(respError);
+      } else {
+        console.log("Log Started!\n");
+      }
+};
+
+function errorFunctionEnd (respError) {
+    if (respError) {
+        console.log(respError);
+      } else {
+        console.log("Log Ended!");
+      }
+};
 
 // ++++++++++++++++ Twitter my-tweets ++++++++++++++++++++++
 function getTweets() {
     // Accesses Twitter Keys
     var client = new Twitter(keys.twitter); 
-    var params = {screen_name: 'aidan_clemente', count: 20};
+    var params = {
+        screen_name: 'aidan_clemente',
+        count: 20
+        };
 
-    client.get('statuses/user_timeline', params, function(responseError, tweets, response) {
-        if (!responseError) {
+    client.get('statuses/user_timeline', params, function(respError, tweets, response) {
 
-            var tweetsArray = [];
+        errorFunction();
 
-            fs.appendFile("log.txt", "-----Tweets Log Entry Start-----\n" + Date() + "\n" + "terminal commands: \n" + process.argv + "\n" + "Data Output: \n", function(err) {
-                if (err) {
-                  console.log(err);
-                } else {
-                  console.log("Tweet Log Started!");
-                }
-             });
+        fs.appendFile("log.txt", "-----Tweets Log Entry Start-----\n\nProcessed at: \n" + Date() + "\n\n" + "terminal commands: \n" + process.argv + "\n\n" + "Data Output: \n", errorFunctionStart());
 
-            //Populates array with tweets and when tweets were created
-            for (var i = 0; i < tweets.length; i++) {
-                tweetsArray.push({
-                    "Tweet: ": tweets[i].text,
-                    "Created at: ": tweets[i].created_at,
-                }); 
+        console.log("-------------------------- Aidan's Tweets -----------------------------\n");
+        for (i = 0; i < tweets.length; i++) {
+            console.log(i + 1 + ". Tweet: ", tweets[i].text);
 
-                //Prints the array contents to console
-                for (var key in tweetsArray[i]){
-                    console.log("--------------")
-                    console.log(key + tweetsArray[i][key]);
-                    
-                    //The Log isn't working correctly, tweets out of order
-                    fs.appendFile("log.txt", "\n-----Tweets-----\n" + key + tweetsArray[i][key], function(err) {
-                        if (err) {
-                        console.log(err);
-                        } else {
-                        console.log("Tweets Added!");
-                        }
-                    });  
-                }; 
-            };
+            // For alingment once the number of the tweet is 10 or higher
+            if (i + 1 > 9) {
+                console.log("    Tweeted on: ", tweets[i].created_at + "\n");
+            } else {
+                console.log("   Tweeted on: ", tweets[i].created_at + "\n");
+            }  
+            
+            fs.appendFile("log.txt", (i + 1 + ". Tweet: ", tweets[i].text + "\nTweeted on: " + tweets[i].created_at + "\n\n"), errorFunction());
+        };
+        console.log("-----------------------------------------------------------------------\n");
 
-            fs.appendFile("log.txt", "\n-----Tweets Log Entry End-----\n", function(err) {
-                  if (err) {
-                    console.log(err);
-                  } else {
-                    console.log("Tweet Log Ended!");
-                  }
-            });
-        }
+        fs.appendFile("log.txt", "-----Tweets Log Entry End-----\n\n", errorFunctionEnd());
     });
 };
 
@@ -81,9 +85,9 @@ function searchSong(searchValue) {
    
     spotify.search({ type: 'track', query: searchValue }, function(respError, response) {
 
-         if (respError) {
-            return console.log("Error occured: ", respError);
-         }
+        fs.appendFile("log.txt", "-----Spotify Log Entry Start-----\nProcessed on:\n" + Date() + "\n\n" + "terminal commands:\n" + process.argv + "\n\n" + "Data Output: \n", errorFunctionStart());
+
+        errorFunction()
 
          var songResp = response.tracks.items;
 
@@ -93,7 +97,8 @@ function searchSong(searchValue) {
          console.log(("Album name: " + songResp[0].album.name));
          console.log(("URL Preview: " + songResp[0].preview_url));
          console.log("\n------------------------------------------------------\n");
-         
+
+         fs.appendFile("log.txt", "Artist: " + songResp[0].artists[0].name + "\nSong title: " + response.tracks.items[0].name + "\nAlbum name: " + songResp[0].album.name + "\nURL Preview: " + songResp[0].preview_url + "\n\n-----Spotify Log Entry End-----\n\n", errorFunctionEnd());
      })
 };
 
@@ -106,9 +111,13 @@ function searchMovie(searchValue) {
 
     var queryUrl = "http://www.omdbapi.com/?t=" + searchValue.trim() + "&y=&plot=short&apikey=trilogy";
 
-    request(queryUrl, function(err, response, body) {
+    request(queryUrl, function(respError, response, body) {
 
-        if (!err && response.statusCode === 200) {
+        fs.appendFile("log.txt", "-----OMDB Log Entry Start-----\nProcessed on:\n" + Date() + "\n\n" + "terminal commands:\n" + process.argv + "\n\n" + "Data Output: \n", errorFunctionStart());
+
+        errorFunction()
+
+        if (!respError && response.statusCode === 200) {
             movieBody = JSON.parse(body);
             
             console.log("\n------------- OMDB Search Results ------------------\n");
@@ -127,6 +136,8 @@ function searchMovie(searchValue) {
             console.log("Plot: " + movieBody.Plot);
             console.log("Actors: " + movieBody.Actors);
             console.log("\n----------------------------------------------------\n");
+
+            fs.appendFile("log.txt", "Movie Title: " + movieBody.Title + "\nYear: " + movieBody.Year + "\nIMDB rating: " + movieBody.imdbRating + "\nRotten Tomatoes Rating: " + movieBody.Ratings[[1]].Value + "\nCountry: " + movieBody.Country + "\nLanguage: " + movieBody.Language + "\nPlot: " + movieBody.Plot + "\nActors: " + movieBody.Actors + "\n\n-----OMDB Log Entry End-----\n\n", errorFunctionEnd());
         }
     });
 };
@@ -134,12 +145,12 @@ function searchMovie(searchValue) {
 //+++++++++++++++++ Random do-what-it-says +++++++++++++++++++++++++
 function randomSearch() {
 
-    fs.readFile("random.txt", "utf8", function(error, data) {
+    fs.readFile("random.txt", "utf8", function(respError, data) {
 
         var randomArray = data.split(", ");
 
-        if (error) {
-            return console.log(error);
+        if (respError) {
+            return console.log(respError);
         } else if (randomArray[0] == "spotify-this-song") {
             searchSong(randomArray[1]);
         } else if (randomArray[0] == "movie-this") {
@@ -168,12 +179,15 @@ switch (command) {
 };
 
 //------------- If the user enters an undefinded command ---------------------------
-var unknown = "";
+var unknownCommand = "";
 
 for (var i = 2; i < process.argv.length; i++) {
-    unknown += process.argv[i] + " ";
+    unknownCommand += process.argv[i] + " ";
 };
 
-if (searchValue != "do-what-it-says" || "movie-this" || "spotify-this-song" || "my-tweets") {
-    console.log("I'm sorry, " + unknown + " is not a command that I recognize. Please try one of the following commands: \n For a random search: node liri.js do-what-it-says \n To search a movie title: node liri.js movie-this (with a movie title following) \n To search Spotify for a song: node liri.js spotify-this-song (with a song title following) \n To see the last 20 of Aidan Clemente's tweets on Twitter: node liri.js my-tweets \n");
+console.log("Unknown Command: ", unknownCommand);
+
+//This is not working correctly: it is logging with the defined commands
+if ((unknownCommand != "do-what-it-says") || (unknownCommand != "movie-this") || (unknownCommand != "spotify-this-song") || (unknownCommand != "my-tweets")) {
+    console.log("I'm sorry, " + unknownCommand + " is not a command that I recognize. Please try one of the following commands: \n For a random search: node liri.js do-what-it-says \n To search a movie title: node liri.js movie-this (with a movie title following) \n To search Spotify for a song: node liri.js spotify-this-song (with a song title following) \n To see the last 20 of Aidan Clemente's tweets on Twitter: node liri.js my-tweets \n");
 }
