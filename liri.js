@@ -35,6 +35,7 @@ function errorFunctionEnd (respError) {
 
 // -------------------- Twitter my-tweets ----------------------------
 function getTweets() {
+
     // Accesses Twitter Keys
     var client = new Twitter(keys.twitter); 
     var params = {
@@ -81,18 +82,18 @@ function searchSong(searchValue) {
 
         fs.appendFile("log.txt", "-----Spotify Log Entry Start-----\nProcessed on:\n" + Date() + "\n\n" + "terminal commands:\n" + process.argv + "\n\n" + "Data Output: \n", errorFunctionStart());
 
-        errorFunction()
+        errorFunction();
 
-         var songResp = response.tracks.items;
+        var songResp = response.tracks.items;
 
-         console.log("\n=============== Spotify Search Result ===============\n");
-         console.log(("Artist: " + songResp[0].artists[0].name));
-         console.log(("Song title: " + response.tracks.items[0].name));
-         console.log(("Album name: " + songResp[0].album.name));
-         console.log(("URL Preview: " + songResp[0].preview_url));
-         console.log("\n=====================================================\n");
+        console.log("\n=============== Spotify Search Result ===============\n");
+        console.log(("Artist: " + songResp[0].artists[0].name));
+        console.log(("Song title: " + response.tracks.items[0].name));
+        console.log(("Album name: " + songResp[0].album.name));
+        console.log(("URL Preview: " + songResp[0].preview_url));
+        console.log("\n=====================================================\n");
 
-         fs.appendFile("log.txt", "Artist: " + songResp[0].artists[0].name + "\nSong title: " + response.tracks.items[0].name + "\nAlbum name: " + songResp[0].album.name + "\nURL Preview: " + songResp[0].preview_url + "\n\n-----Spotify Log Entry End-----\n\n", errorFunctionEnd());
+        fs.appendFile("log.txt", "Artist: " + songResp[0].artists[0].name + "\nSong title: " + response.tracks.items[0].name + "\nAlbum name: " + songResp[0].album.name + "\nURL Preview: " + songResp[0].preview_url + "\n\n-----Spotify Log Entry End-----\n\n", errorFunctionEnd());
      })
 };
 
@@ -109,7 +110,7 @@ function searchMovie(searchValue) {
 
         fs.appendFile("log.txt", "-----OMDB Log Entry Start-----\n\nProcessed on:\n" + Date() + "\n\n" + "terminal commands:\n" + process.argv + "\n\n" + "Data Output: \n", errorFunctionStart());
 
-        errorFunction()
+        errorFunction();
 
         if (!respError && response.statusCode === 200) {
             movieBody = JSON.parse(body);
@@ -143,16 +144,32 @@ function randomSearch() {
 
         var randomArray = data.split(", ");
 
-        if (respError) {
-            return console.log(respError);
-        } else if (randomArray[0] == "spotify-this-song") {
+        errorFunction();
+
+        if (randomArray[0] == "spotify-this-song") {
             searchSong(randomArray[1]);
         } else if (randomArray[0] == "movie-this") {
             searchMovie(randomArray[1]);
         } else {
             getTweets();
         }
-        
+
+// This switch case is throwing an error
+
+        // var randomCommand = randomArray[0];
+        // var randomSearchValue = randomArray[1];
+
+        // switch (randomCommand) {
+        //     case "spotify-this-song":
+        //         searchSong(randomSearchValue);
+        //         break;
+        //     case "movie-this":
+        //         searchMovie(randomSearchValue);
+        //         break;
+        //     default:
+        //         getTweets();
+        // };
+
     });
 };
 
