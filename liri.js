@@ -24,13 +24,13 @@ function errorFunction(respError) {
 // For logging to log.txt
 function errorFunctionStart (respError) {
     errorFunction();
-    console.log("==== Log Started ====");
+    console.log("\nxxxx Log Started xxxx");
 
 };
 
 function errorFunctionEnd (respError) {
     errorFunction();
-    console.log("==== Log Ended ====");
+    console.log("xxxx Log Ended xxxx");
 };
 
 // -------------------- Twitter my-tweets ----------------------------
@@ -48,7 +48,7 @@ function getTweets() {
 
         fs.appendFile("log.txt", "-----Tweets Log Entry Start-----\n\nProcessed at: \n" + Date() + "\n\n" + "terminal commands: \n" + process.argv + "\n\n" + "Data Output: \n", errorFunctionStart());
 
-        console.log("\n-------------- Aidan's Tweets --------------\n");
+        console.log("\n-------------- Aidan's Latest Tweets --------------\n");
         for (i = 0; i < tweets.length; i++) {
             console.log(i + 1 + ". Tweet: ", tweets[i].text);
 
@@ -107,7 +107,7 @@ function searchMovie(searchValue) {
 
     request(queryUrl, function(respError, response, body) {
 
-        fs.appendFile("log.txt", "-----OMDB Log Entry Start-----\nProcessed on:\n" + Date() + "\n\n" + "terminal commands:\n" + process.argv + "\n\n" + "Data Output: \n", errorFunctionStart());
+        fs.appendFile("log.txt", "-----OMDB Log Entry Start-----\n\nProcessed on:\n" + Date() + "\n\n" + "terminal commands:\n" + process.argv + "\n\n" + "Data Output: \n", errorFunctionStart());
 
         errorFunction()
 
@@ -170,18 +170,6 @@ switch (command) {
     case "do-what-it-says":
         randomSearch();
         break;
+    default:
+        console.log("I'm sorry, " + command + " is not a command that I recognize. Please try one of the following commands: \n\n  1. For a random search: node liri.js do-what-it-says \n\n  2. To search a movie title: node liri.js movie-this (with a movie title following) \n\n  3. To search Spotify for a song: node liri.js spotify-this-song (with a song title following) \n\n  4. To see the last 20 of Aidan Clemente's tweets on Twitter: node liri.js my-tweets \n");
 };
-
-// **************** If the user enters an undefinded command ************************
-var unknownCommand = "";
-
-for (var i = 2; i < process.argv.length; i++) {
-    unknownCommand += process.argv[i] + " ";
-};
-
-console.log("Unknown Command: ", unknownCommand);
-
-//This is not working correctly: it is logging with the defined commands
-if ((unknownCommand != "do-what-it-says") || (unknownCommand != "movie-this") || (unknownCommand != "spotify-this-song") || (unknownCommand != "my-tweets")) {
-    console.log("I'm sorry, " + unknownCommand + " is not a command that I recognize. Please try one of the following commands: \n\n  1. For a random search: node liri.js do-what-it-says \n\n  2. To search a movie title: node liri.js movie-this (with a movie title following) \n\n  3. To search Spotify for a song: node liri.js spotify-this-song (with a song title following) \n\n  4. To see the last 20 of Aidan Clemente's tweets on Twitter: node liri.js my-tweets \n");
-}
