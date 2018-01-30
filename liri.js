@@ -60,7 +60,7 @@ function getTweets() {
                 console.log("   Tweeted on: ", tweets[i].created_at + "\n");
             }  
             
-            fs.appendFile("log.txt", (i + 1 + ". Tweet: ", tweets[i].text + "\nTweeted on: " + tweets[i].created_at + "\n\n"), errorFunction());
+            fs.appendFile("log.txt", (i + 1) + ". Tweet: " + tweets[i].text + "\nTweeted on: " + tweets[i].created_at + "\n\n", errorFunction());
         };
         console.log("--------------------------------------------------\n");
 
@@ -85,16 +85,23 @@ function searchSong(searchValue) {
         errorFunction();
 
         var songResp = response.tracks.items;
+        
+        // For 20 Results I want to have an option on how many the user wants to search for
+        for (var i = 0; i < songResp.length; i++) {
+            console.log("\n=============== Spotify Search Result "+ (i+1) +" ===============\n");
+            console.log(("Artist: " + songResp[i].artists[0].name));
+            console.log(("Song title: " + songResp[i].name));
+            console.log(("Album name: " + songResp[i].album.name));
+            console.log(("URL Preview: " + songResp[i].preview_url));
+            console.log("\n=========================================================\n");
 
-        console.log("\n=============== Spotify Search Result ===============\n");
-        console.log(("Artist: " + songResp[0].artists[0].name));
-        console.log(("Song title: " + response.tracks.items[0].name));
-        console.log(("Album name: " + songResp[0].album.name));
-        console.log(("URL Preview: " + songResp[0].preview_url));
-        console.log("\n=====================================================\n");
+            fs.appendFile("log.txt", "\n-----------Result "+ (i+1) +" -------------\nArtist: " + songResp[i].artists[0].name + "\nSong title: " + songResp[i].name + "\nAlbum name: " + songResp[i].album.name + "\nURL Preview: " + songResp[i].preview_url + "\n---------------------------------\n", errorFunction());
+        }
 
-        fs.appendFile("log.txt", "Artist: " + songResp[0].artists[0].name + "\nSong title: " + response.tracks.items[0].name + "\nAlbum name: " + songResp[0].album.name + "\nURL Preview: " + songResp[0].preview_url + "\n\n-----Spotify Log Entry End-----\n\n", errorFunctionEnd());
-     })
+        fs.appendFile("log.txt","-----Spotify Log Entry End-----\n\n", errorFunctionEnd());
+
+    })
+
 };
 
 // ++++++++++++++++ OMDB movie-this +++++++++++++++++++++++
