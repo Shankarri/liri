@@ -74,19 +74,42 @@ function searchSong(searchValue) {
     if (searchValue == "") {
         searchValue = "The Sign Ace of Base";
     }
+      
+        // For max 20 Results I want to have an option on how many the user wants to search for
+            // have a if statement, if the command == spotify-this-song then -
+            // process.argv[3] is where they enter the number of desired returned search results
+                // if process.argv[3] is a number between 1 and 20 then -
+                // add the limit = # to the search URL
+                // need a new for loop to define searchValue
 
     // Accesses Spotify keys  
     var spotify = new Spotify(keys.spotify);
+
+    var searchLimit = "";
+
+    if (isNaN(parseInt(process.argv[3])) == false) {
+        searchLimit = process.argv[3];
+
+        console.log("\nYou requested to return: " + searchLimit + " songs");
+        searchValue = "";
+
+        for (var i = 4; i < process.argv.length; i++) {        
+            searchValue += process.argv[i] + " ";
+        };
+
+    } else {
+        console.log("\nFor more than 1 result, add the number of results you would like to be returned after spotify-this-song.\n\nExample: if you would like 3 results returned enter:\n     node.js spotify-this-song 3 Kissed by a Rose")
+        searchLimit = 1;
+    }
    
-    spotify.search({ type: 'track', query: searchValue }, function(respError, response) {
+    spotify.search({ type: 'track', query: searchValue, limit: searchLimit }, function(respError, response) {
 
         fs.appendFile("log.txt", "-----Spotify Log Entry Start-----\nProcessed on:\n" + Date() + "\n\n" + "terminal commands:\n" + process.argv + "\n\n" + "Data Output: \n", errorFunctionStart());
 
         errorFunction();
 
         var songResp = response.tracks.items;
-        
-        // For 20 Results I want to have an option on how many the user wants to search for
+
         for (var i = 0; i < songResp.length; i++) {
             console.log("\n=============== Spotify Search Result "+ (i+1) +" ===============\n");
             console.log(("Artist: " + songResp[i].artists[0].name));
@@ -95,7 +118,7 @@ function searchSong(searchValue) {
             console.log(("URL Preview: " + songResp[i].preview_url));
             console.log("\n=========================================================\n");
 
-            fs.appendFile("log.txt", "\n-----------Result "+ (i+1) +" -------------\nArtist: " + songResp[i].artists[0].name + "\nSong title: " + songResp[i].name + "\nAlbum name: " + songResp[i].album.name + "\nURL Preview: " + songResp[i].preview_url + "\n---------------------------------\n", errorFunction());
+            fs.appendFile("log.txt", "\n========= Result "+ (i+1) +" =========\nArtist: " + songResp[i].artists[0].name + "\nSong title: " + songResp[i].name + "\nAlbum name: " + songResp[i].album.name + "\nURL Preview: " + songResp[i].preview_url + "\n=============================\n", errorFunction());
         }
 
         fs.appendFile("log.txt","-----Spotify Log Entry End-----\n\n", errorFunctionEnd());
@@ -195,5 +218,5 @@ switch (command) {
         randomSearch();
         break;
     default:
-        console.log("I'm sorry, " + command + " is not a command that I recognize. Please try one of the following commands: \n\n  1. For a random search: node liri.js do-what-it-says \n\n  2. To search a movie title: node liri.js movie-this (with a movie title following) \n\n  3. To search Spotify for a song: node liri.js spotify-this-song (with a song title following) \n\n  4. To see the last 20 of Aidan Clemente's tweets on Twitter: node liri.js my-tweets \n");
+        console.log("I'm sorry, " + command + " is not a command that I recognize. Please try one of the following commands: \n\n  1. For a random search: node liri.js do-what-it-says \n\n  2. To search a movie title: node liri.js movie-this (with a movie title following) \n\n  3. To search Spotify for a song: node liri.js spotify-this-song (*optional number for amount of returned results) (specify song title)\n     Example: node liri.js spotify-this-song 15 Candle in the Wind\n\n  4. To see the last 20 of Aidan Clemente's tweets on Twitter: node liri.js my-tweets \n");
 };
