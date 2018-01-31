@@ -25,7 +25,6 @@ function errorFunction(respError) {
 function errorFunctionStart (respError) {
     errorFunction();
     console.log("\nxxxx Log Started xxxx");
-
 };
 
 function errorFunctionEnd (respError) {
@@ -73,6 +72,7 @@ function getTweets() {
 // ======================= Spotify spotify-this-song ============================
 function searchSong(searchValue) {
 
+    // Default search value if no song is given
     if (searchValue == "") {
         searchValue = "The Sign Ace of Base";
     }
@@ -82,14 +82,14 @@ function searchSong(searchValue) {
 
     var searchLimit = "";
 
-    // Allows the user to input the number of returned spotify results, default 1 return in no input given
+    // Allows the user to input the number of returned spotify results, defaults 1 return if no input given
     if (isNaN(parseInt(process.argv[3])) == false) {
         searchLimit = process.argv[3];
 
         console.log("\nYou requested to return: " + searchLimit + " songs");
-        searchValue = "";
-
+        
         // Resets the searchValue to account for searchLimit
+        searchValue = "";
         for (var i = 4; i < process.argv.length; i++) {        
             searchValue += process.argv[i] + " ";
         };
@@ -120,13 +120,13 @@ function searchSong(searchValue) {
         }
 
         fs.appendFile("log.txt","-----Spotify Log Entry End-----\n\n", errorFunctionEnd());
-
     })
 };
 
-// ++++++++++++++++ OMDB movie-this +++++++++++++++++++++++
+// ++++++++++++++++++++ OMDB movie-this +++++++++++++++++++++++++
 function searchMovie(searchValue) {
 
+    // Default search value if no movie is given
     if (searchValue == "") {
         searchValue = "Mr. Nobody";
     }
@@ -139,19 +139,33 @@ function searchMovie(searchValue) {
 
         errorFunction();
 
-        if (!respError && response.statusCode === 200) {
-            
+        if (JSON.parse(body).Error == 'Movie not found!' ) {
+
+            console.log("\nI'm sorry, I could not find any movies that matched the title " + searchValue + ". Please check your spelling and try again.\n")
+
+            fs.appendFile("log.txt", "I'm sorry, I could not find any movies that matched the title " + searchValue + ". Please check your spelling and try again.\n\n-----OMDB Log Entry End-----\n\n", errorFunctionEnd());
+        
+        } else {
+
             movieBody = JSON.parse(body);
-            
+
             console.log("\n++++++++++++++++ OMDB Search Results ++++++++++++++++\n");
             console.log("Movie Title: " + movieBody.Title);
             console.log("Year: " + movieBody.Year);
             console.log("IMDB rating: " + movieBody.imdbRating);
 
+            // If there is no Rotten Tomatoes Rating
             if (movieBody.Ratings.length < 2) {
+
                 console.log("There is no Rotten Tomatoes Rating for this movie.")
+
+                fs.appendFile("log.txt", "Movie Title: " + movieBody.Title + "\nYear: " + movieBody.Year + "\nIMDB rating: " + movieBody.imdbRating + "\nRotten Tomatoes Rating: There is no Rotten Tomatoes Rating for this movie \nCountry: " + movieBody.Country + "\nLanguage: " + movieBody.Language + "\nPlot: " + movieBody.Plot + "\nActors: " + movieBody.Actors + "\n\n-----OMDB Log Entry End-----\n\n", errorFunctionEnd());
+                
             } else {
+
                 console.log("Rotten Tomatoes Rating: " + movieBody.Ratings[[1]].Value);
+
+                fs.appendFile("log.txt", "Movie Title: " + movieBody.Title + "\nYear: " + movieBody.Year + "\nIMDB rating: " + movieBody.imdbRating + "\nRotten Tomatoes Rating: " + movieBody.Ratings[[1]].Value + "\nCountry: " + movieBody.Country + "\nLanguage: " + movieBody.Language + "\nPlot: " + movieBody.Plot + "\nActors: " + movieBody.Actors + "\n\n-----OMDB Log Entry End-----\n\n", errorFunctionEnd());
             }
             
             console.log("Country: " + movieBody.Country);
@@ -159,13 +173,11 @@ function searchMovie(searchValue) {
             console.log("Plot: " + movieBody.Plot);
             console.log("Actors: " + movieBody.Actors);
             console.log("\n+++++++++++++++++++++++++++++++++++++++++++++++++\n");
-
-            fs.appendFile("log.txt", "Movie Title: " + movieBody.Title + "\nYear: " + movieBody.Year + "\nIMDB rating: " + movieBody.imdbRating + "\nRotten Tomatoes Rating: " + movieBody.Ratings[[1]].Value + "\nCountry: " + movieBody.Country + "\nLanguage: " + movieBody.Language + "\nPlot: " + movieBody.Plot + "\nActors: " + movieBody.Actors + "\n\n-----OMDB Log Entry End-----\n\n", errorFunctionEnd());
-        }
+        };      
     });
 };
 
-// xxxxxxxxxxxxxxxxxxxxxxxxxxx Random do-what-it-says xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+// xxxxxxxxxxxxxxxxxx Random do-what-it-says xxxxxxxxxxxxxxxxxxxxxx
 function randomSearch() {
 
     fs.readFile("random.txt", "utf8", function(respError, data) {
