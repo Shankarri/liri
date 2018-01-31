@@ -47,9 +47,10 @@ function getTweets() {
 
         errorFunction();
 
-        fs.appendFile("log.txt", "-----Tweets Log Entry Start-----\n\nProcessed at: \n" + Date() + "\n\n" + "terminal commands: \n" + process.argv + "\n\n" + "Data Output: \n", errorFunctionStart());
+        fs.appendFile("log.txt", "-----Tweets Log Entry Start-----\n\nProcessed at: \n" + Date() + "\n\n" + "terminal commands: \n" + process.argv + "\n\n" + "Data Output: \n\n", errorFunctionStart());
 
         console.log("\n-------------- Aidan's Latest Tweets --------------\n");
+
         for (i = 0; i < tweets.length; i++) {
             console.log(i + 1 + ". Tweet: ", tweets[i].text);
 
@@ -62,6 +63,7 @@ function getTweets() {
             
             fs.appendFile("log.txt", (i + 1) + ". Tweet: " + tweets[i].text + "\nTweeted on: " + tweets[i].created_at + "\n\n", errorFunction());
         };
+
         console.log("--------------------------------------------------\n");
 
         fs.appendFile("log.txt", "-----Tweets Log Entry End-----\n\n", errorFunctionEnd());
@@ -74,25 +76,20 @@ function searchSong(searchValue) {
     if (searchValue == "") {
         searchValue = "The Sign Ace of Base";
     }
-      
-        // For max 20 Results I want to have an option on how many the user wants to search for
-            // have a if statement, if the command == spotify-this-song then -
-            // process.argv[3] is where they enter the number of desired returned search results
-                // if process.argv[3] is a number between 1 and 20 then -
-                // add the limit = # to the search URL
-                // need a new for loop to define searchValue
 
     // Accesses Spotify keys  
     var spotify = new Spotify(keys.spotify);
 
     var searchLimit = "";
 
+    // Allows the user to input the number of returned spotify results, default 1 return in no input given
     if (isNaN(parseInt(process.argv[3])) == false) {
         searchLimit = process.argv[3];
 
         console.log("\nYou requested to return: " + searchLimit + " songs");
         searchValue = "";
 
+        // Resets the searchValue to account for searchLimit
         for (var i = 4; i < process.argv.length; i++) {        
             searchValue += process.argv[i] + " ";
         };
@@ -102,6 +99,7 @@ function searchSong(searchValue) {
         searchLimit = 1;
     }
    
+    // Searches Spotify with given values
     spotify.search({ type: 'track', query: searchValue, limit: searchLimit }, function(respError, response) {
 
         fs.appendFile("log.txt", "-----Spotify Log Entry Start-----\nProcessed on:\n" + Date() + "\n\n" + "terminal commands:\n" + process.argv + "\n\n" + "Data Output: \n", errorFunctionStart());
@@ -124,7 +122,6 @@ function searchSong(searchValue) {
         fs.appendFile("log.txt","-----Spotify Log Entry End-----\n\n", errorFunctionEnd());
 
     })
-
 };
 
 // ++++++++++++++++ OMDB movie-this +++++++++++++++++++++++
@@ -138,11 +135,12 @@ function searchMovie(searchValue) {
 
     request(queryUrl, function(respError, response, body) {
 
-        fs.appendFile("log.txt", "-----OMDB Log Entry Start-----\n\nProcessed on:\n" + Date() + "\n\n" + "terminal commands:\n" + process.argv + "\n\n" + "Data Output: \n", errorFunctionStart());
+        fs.appendFile("log.txt", "-----OMDB Log Entry Start-----\n\nProcessed on:\n" + Date() + "\n\n" + "terminal commands:\n" + process.argv + "\n\n" + "Data Output: \n\n", errorFunctionStart());
 
         errorFunction();
 
         if (!respError && response.statusCode === 200) {
+            
             movieBody = JSON.parse(body);
             
             console.log("\n++++++++++++++++ OMDB Search Results ++++++++++++++++\n");
@@ -183,27 +181,12 @@ function randomSearch() {
         } else {
             getTweets();
         }
-
-// This switch case is throwing an error
-
-        // var randomCommand = randomArray[0];
-        // var randomSearchValue = randomArray[1];
-
-        // switch (randomCommand) {
-        //     case "spotify-this-song":
-        //         searchSong(randomSearchValue);
-        //         break;
-        //     case "movie-this":
-        //         searchMovie(randomSearchValue);
-        //         break;
-        //     default:
-        //         getTweets();
-        // };
-
     });
 };
 
-// Runs corresponding search based on user command
+// <<<<<<<<<<<<<<<<< Main Switch Case >>>>>>>>>>>>>>>>>>>>
+
+// Runs corresponding function based on user command
 switch (command) {
     case "my-tweets":
         getTweets();
