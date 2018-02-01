@@ -1,5 +1,7 @@
 # LIRI Bot
-Link to youtube video of me demonstrating LIRI Bot:
+[![YouTube video demonstration of Aidan's LIRI Bot: ](https://img.youtube.com/vi/okHGw1v9X5k/0.jpg)](https://www.youtube.com/watch?v=okHGw1v9X5k)
+
+Link to YouTube video of me demonstrating LIRI Bot:
 http://youtu.be/okHGw1v9X5k?hd=1
 
 
