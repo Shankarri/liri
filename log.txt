@@ -1,0 +1,63 @@
+-----OMDB Log Entry Start-----
+
+Processed on:
+Thu Feb 01 2018 18:26:46 GMT-0500 (Eastern Standard Time)
+
+terminal commands:
+C:\Program Files\nodejs\node.exe,C:\Users\aidan\Desktop\class\homework8\liri\liri.js,movie-this,Ghostbusters
+
+Data Output: 
+
+Movie Title: Ghostbusters
+Year: 1984
+IMDB rating: 7.8
+Rotten Tomatoes Rating: 97%
+Country: USA
+Language: English
+Plot: Three former parapsychology professors set up shop as a unique ghost removal service.
+Actors: Bill Murray, Dan Aykroyd, Sigourney Weaver, Harold Ramis
+
+-----OMDB Log Entry End-----
+
+-----OMDB Log Entry Start-----
+
+Processed on:
+Thu Feb 01 2018 18:28:35 GMT-0500 (Eastern Standard Time)
+
+terminal commands:
+C:\Program Files\nodejs\node.exe,C:\Users\aidan\Desktop\class\homework8\liri\liri.js,movie-this,Ghostbusters
+
+Data Output: 
+
+Movie Title: Ghostbusters
+Year: 1984
+IMDB rating: 7.8
+Rotten Tomatoes Rating: 97%
+Country: USA
+Language: English
+Plot: Three former parapsychology professors set up shop as a unique ghost removal service.
+Actors: Bill Murray, Dan Aykroyd, Sigourney Weaver, Harold Ramis
+
+-----OMDB Log Entry End-----
+
+-----OMDB Log Entry Start-----
+
+Processed on:
+Thu Feb 01 2018 18:28:45 GMT-0500 (Eastern Standard Time)
+
+terminal commands:
+C:\Program Files\nodejs\node.exe,C:\Users\aidan\Desktop\class\homework8\liri\liri.js,movie-this,Ghostbusters
+
+Data Output: 
+
+Movie Title: Ghostbusters
+Year: 1984
+IMDB rating: 7.8
+Rotten Tomatoes Rating: 97%
+Country: USA
+Language: English
+Plot: Three former parapsychology professors set up shop as a unique ghost removal service.
+Actors: Bill Murray, Dan Aykroyd, Sigourney Weaver, Harold Ramis
+
+-----OMDB Log Entry End-----
+
